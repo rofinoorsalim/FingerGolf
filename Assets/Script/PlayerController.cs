@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TMP_Text shootCountText;
     [SerializeField] LayerMask ballLayer;
     [SerializeField] LayerMask rayLayer;
-    [SerializeField] Transform cameraPivot;
+    [SerializeField] FollowBall cameraPivot;
 
     [SerializeField] Camera cam;
 
@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
         
         arrow.SetActive(false);
         shootCountText.text = "Shoot Count: " + 0;
+
+        line.enabled = false;
     }
 
     void Update()
@@ -60,10 +62,19 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        //if (!cameraPivot.isMoving && aim.gameObject.activeInHierarchy == false)
+        //{
+            aim.gameObject.SetActive(true);
+            var rectx = aim.GetComponent<RectTransform>();
+            rectx.anchoredPosition = cam.WorldToScreenPoint(ball.Position);
+        //}
+
         if (this.transform.position != ball.Position)
         {
             this.transform.position = ball.Position;
             aim.gameObject.SetActive(true);
+            var rect = aim.GetComponent<RectTransform>();
+            rect.anchoredPosition = cam.WorldToScreenPoint(ball.Position);
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -72,6 +83,7 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(ray, ballDistance, ballLayer)){
                 isShooting = true;
                 arrow.SetActive(true);
+                line.enabled = true;
             }
         }
 
@@ -90,7 +102,7 @@ public class PlayerController : MonoBehaviour
                 forceMagnitude = Mathf.Clamp(forceMagnitude, 0, 5);
                 forceFactor = forceMagnitude / 5;
             }
-        }
+
         //arrow
         this.transform.LookAt(this.transform.position + forceDir);
         arrow.transform.localScale = new Vector3(1 + 0.5f*forceFactor, 1 + 0.5f * forceFactor, 1 + 2f * forceFactor);
@@ -106,8 +118,8 @@ public class PlayerController : MonoBehaviour
 
         //line
         var ballScrPos = cam.WorldToScreenPoint(ball.Position);
-        line.SetPositions(new Vector3[] { ballScrPos, Input.mousePosition });
-
+        line.SetPositions (new Vector3[] { ballScrPos, Input.mousePosition});
+        }
 
 
         //camera mode
@@ -146,6 +158,9 @@ public class PlayerController : MonoBehaviour
             forceDir = Vector3.zero;
             isShooting = false;
             arrow.SetActive(false);
+
+            aim.gameObject.SetActive(false);
+            line.enabled = false;
         }
 
         LastMousePotition = Input.mousePosition;
