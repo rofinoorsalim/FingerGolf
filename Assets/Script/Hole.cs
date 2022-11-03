@@ -10,6 +10,7 @@ public class Hole : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        SoundManager.instance.WindSOundStart();
         isEntered = true;
     }
 }

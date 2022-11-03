@@ -8,12 +8,24 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/L1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/L2.unity
+    guid: 9191bc41a3cfcce418eb5a6f6f211348
+  - enabled: 1
+    path: Assets/Scenes/L3.unity
+    guid: 383809bea9e3de246aaa9f11667a8fbe
+  - enabled: 1
+    path: Assets/Scenes/L4.unity
+    guid: faa80418a756f7e489f7bee89c23dd56
+  - enabled: 1
+    path: Assets/Scenes/L5.unity
+    guid: 8d606b0bf40de304eb3cd613cc754fa8
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/L2.unity
-    guid: 044de1968fbb46d488f69eb17fe66b4f
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/LoadingProgress.unity
     guid: b414670d115c6874c863f72d8bf581fb
